@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments, except: [:show]
+
   get 'pages/info'
 
     root to: redirect('/ideas')
