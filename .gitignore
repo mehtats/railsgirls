@@ -16,6 +16,4 @@
 !/log/.keep
 /tmp
 
-public/uploads/idea/picture/5/aboutus_img.png
-
-public/uploads/idea/picture/5/thumb_aboutus_img.png
+public/uploads/*
