@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  has_many :ideas
 end
