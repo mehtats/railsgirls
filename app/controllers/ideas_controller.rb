@@ -5,19 +5,25 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
-  end
+ end
 
   # GET /ideas/1
   # GET /ideas/1.json
   def show
     @comments = @idea.comments.all
     @comment = @idea.comments.build
+
+    # user_idがない場合用に仮でインスタンス作ったけどもう少しスマートな方法あるかね
+    if @idea.user_id.nil?
+        @user = User.new
+    else
+        @user = User.find(@idea.user_id)
+    end
   end
 
   # GET /ideas/new
   def new
     @idea = Idea.new
-    @idea.user_id = current_user.id
   end
 
   # GET /ideas/1/edit
@@ -28,6 +34,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
+    @idea.user_id = current_user.id
 
     respond_to do |format|
       if @idea.save
@@ -72,6 +79,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:name, :description, :picture, :user_id)
+      params.require(:idea).permit(:name, :description, :picture)
     end
 end

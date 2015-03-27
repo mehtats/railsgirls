@@ -2,9 +2,10 @@
 
 <h1>Listing Ideas</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>投稿者</th>
       <th>Name</th>
       <th>Description</th>
       <th>Picture</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @ideas.each do |idea| %>
       <tr>
+        <td><%= User.find(idea.user_id).email if !idea.user_id.nil? %></td>
         <td><%= idea.name %></td>
         <td><%= idea.description %></td>
         <td><%= image_tag idea.picture_url(:thumb) if idea.picture? %></td>
