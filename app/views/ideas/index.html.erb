@@ -17,12 +17,17 @@
     <% @ideas.each do |idea| %>
       <tr>
         <td><%= User.find(idea.user_id).email if !idea.user_id.nil? %></td>
-        <td><%= idea.name %></td>
+        <td><%= idea.name %><%= idea.user_id %></td>
         <td><%= idea.description %></td>
         <td><%= image_tag idea.picture_url(:thumb) if idea.picture? %></td>
         <td><%= link_to 'Show', idea %></td>
+        <% if !idea.user_id.nil? and idea.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
         <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

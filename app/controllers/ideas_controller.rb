@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
- end
+  end
 
   # GET /ideas/1
   # GET /ideas/1.json
@@ -15,9 +15,9 @@ class IdeasController < ApplicationController
 
     # user_idがない場合用に仮でインスタンス作ったけどもう少しスマートな方法あるかね
     if @idea.user_id.nil?
-        @user = User.new
+      @user = User.new
     else
-        @user = User.find(@idea.user_id)
+      @user = User.find(@idea.user_id)
     end
   end
 
@@ -28,6 +28,9 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
+    if @idea.user_id != current_user.id
+      redirect_to ideas_url, notice: '投稿したユーザー本人以外は編集できません.'
+    end
   end
 
   # POST /ideas
@@ -64,6 +67,9 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
+    if @idea.user_id != current_user.id
+      redirect_to ideas_url, notice: '投稿したユーザー本人以外は削除できません.'
+    end
     @idea.destroy
     respond_to do |format|
       format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
