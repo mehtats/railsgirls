@@ -17,7 +17,7 @@
     <% @ideas.each do |idea| %>
       <tr>
         <td><%= User.find(idea.user_id).email if !idea.user_id.nil? %></td>
-        <td><%= idea.name %><%= idea.user_id %></td>
+        <td><%= idea.name %></td>
         <td><%= idea.description %></td>
         <td><%= image_tag idea.picture_url(:thumb) if idea.picture? %></td>
         <td><%= link_to 'Show', idea %></td>
