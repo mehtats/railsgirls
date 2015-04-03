@@ -29,9 +29,9 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
-    if @idea.user_id != current_user.id
-      # redirect_to ideas_url, notice: '投稿したユーザー本人以外は編集できません.'
-    end
+    # if @idea.user_id != current_user.id
+    #   redirect_to ideas_url, notice: '投稿したユーザー本人以外は編集できません.'
+    # end
   end
 
   # POST /ideas
@@ -68,9 +68,9 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    if @idea.user_id != current_user.id
-      # redirect_to ideas_url, notice: '投稿したユーザー本人以外は削除できません.'
-    end
+    # if @idea.user_id != current_user.id
+    #   redirect_to ideas_url, notice: '投稿したユーザー本人以外は削除できません.'
+    # end
     @idea.destroy
     respond_to do |format|
       format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
