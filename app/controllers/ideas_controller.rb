@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /ideas
   # GET /ideas.json
@@ -29,7 +30,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     if @idea.user_id != current_user.id
-      redirect_to ideas_url, notice: '投稿したユーザー本人以外は編集できません.'
+      # redirect_to ideas_url, notice: '投稿したユーザー本人以外は編集できません.'
     end
   end
 
@@ -68,7 +69,7 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1.json
   def destroy
     if @idea.user_id != current_user.id
-      redirect_to ideas_url, notice: '投稿したユーザー本人以外は削除できません.'
+      # redirect_to ideas_url, notice: '投稿したユーザー本人以外は削除できません.'
     end
     @idea.destroy
     respond_to do |format|

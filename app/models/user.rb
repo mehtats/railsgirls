@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   has_many :ideas
+  ROLES = %w[admin user]
 end
